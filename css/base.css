@@ -1,0 +1,234 @@
+/* =========================================================================
+   Cluster — базові стилі
+   Скидання, типографіка, доступність (фокус, прихований текст),
+   спільні компоненти: шапка, кнопки-перемикачі, підвал.
+   ========================================================================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-sans);
+  font-size: var(--fs-base);
+  line-height: var(--lh-base);
+  color: var(--color-text-on-board);
+  background-color: var(--color-board);
+  /* Легка «коркова» текстура тільки градієнтами — без зображень */
+  background-image:
+    radial-gradient(circle at 20% 30%, var(--color-board-texture) 0 2px, transparent 3px),
+    radial-gradient(circle at 70% 80%, var(--color-board-texture) 0 1.5px, transparent 2.5px);
+  background-size: 37px 41px, 53px 47px;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+}
+
+h1,
+h2,
+h3 {
+  line-height: var(--lh-tight);
+  margin: 0 0 var(--space-3);
+}
+
+p {
+  margin: 0 0 var(--space-3);
+}
+
+a {
+  color: inherit;
+}
+
+button {
+  font: inherit;
+}
+
+/* ---- Доступність ---- */
+
+/* Атрибут hidden завжди сильніший за display у компонентах */
+[hidden] {
+  display: none !important;
+}
+
+/* Видимий фокус для клавіатури: подвійне кільце читається на будь-якому фоні */
+:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 6px var(--color-focus-inner);
+  border-radius: var(--radius-sm);
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: var(--space-4);
+  top: -100px;
+  z-index: 100;
+  padding: var(--space-2) var(--space-4);
+  background: var(--color-focus);
+  color: var(--color-ink);
+  font-weight: var(--fw-bold);
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  top: var(--space-4);
+}
+
+/* ---- Макет ---- */
+
+.container {
+  width: min(100% - 2 * var(--space-4), var(--container));
+  margin-inline: auto;
+}
+
+main {
+  flex: 1;
+}
+
+/* ---- Шапка ---- */
+
+.site-header {
+  position: relative;
+  z-index: var(--z-header);
+  padding-block: var(--space-5) var(--space-4);
+  border-bottom: 1px solid rgba(242, 236, 225, 0.12);
+}
+
+.site-header__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--tracking-stamp);
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.logo__mark {
+  width: 1.4em;
+  height: 1.4em;
+}
+
+/* ---- Перемикачі (кнопки з aria-pressed) ---- */
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 44px; /* мінімальна зона дотику */
+  padding: var(--space-2) var(--space-4);
+  border: 2px solid var(--color-text-muted);
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--color-text-on-board);
+  font-size: var(--fs-sm);
+  cursor: pointer;
+  transition: background-color var(--dur-fast), color var(--dur-fast),
+    border-color var(--dur-fast);
+}
+
+.toggle::before {
+  content: "";
+  width: 0.75em;
+  height: 0.75em;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+}
+
+.toggle:hover {
+  border-color: var(--color-text-on-board);
+}
+
+.toggle[aria-pressed="true"] {
+  background: var(--color-text-on-board);
+  border-color: var(--color-text-on-board);
+  color: var(--color-ink);
+}
+
+.toggle[aria-pressed="true"]::before {
+  background: currentColor;
+}
+
+/* ---- Вступ і підказки ---- */
+
+.lead {
+  max-width: 60ch;
+  color: var(--color-text-muted);
+  font-size: var(--fs-md);
+}
+
+.hint {
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
+.status-message {
+  max-width: 60ch;
+  margin: var(--space-7) auto;
+  padding: var(--space-5);
+  background: var(--color-paper);
+  color: var(--color-ink);
+  box-shadow: var(--shadow-card);
+}
+
+/* ---- Підвал ---- */
+
+.site-footer {
+  padding-block: var(--space-5);
+  border-top: 1px solid rgba(242, 236, 225, 0.12);
+  color: var(--color-text-muted);
+  font-size: var(--fs-sm);
+}

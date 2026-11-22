@@ -1,0 +1,114 @@
+/* =========================================================================
+   Cluster — дизайн-система (токени)
+   -------------------------------------------------------------------------
+   Єдине джерело кольорів, шрифтів, відступів, тіней і тривалостей анімацій.
+   Інші CSS-файли використовують ЛИШЕ ці змінні — не прописуйте кольори
+   напряму в компонентах. Власник файлу: дизайнер команди.
+
+   Контраст (WCAG AA ≥ 4.5:1) перевірено для пар:
+   --color-ink           на --color-paper     ≈ 14.7:1
+   --color-ink-muted     на --color-paper     ≈ 8.6:1
+   --color-accent        на --color-paper     ≈ 6.8:1
+   --color-accent        на --color-photo-frame ≈ 7.5:1
+   --color-text-on-board на --color-board     ≈ 15.0:1
+   --color-text-muted    на --color-board     ≈ 9.0:1
+   ========================================================================= */
+
+:root {
+  /* ---- Кольори: поверхні ---- */
+  --color-board: #1c1814;            /* темна коркова дошка */
+  --color-board-texture: #2a231c;    /* плями/текстура дошки */
+  --color-paper: #f4ecdc;            /* папір карток і нотаток */
+  --color-paper-shade: #e4d6bd;      /* затінений край паперу */
+  --color-photo-frame: #fbf8f1;      /* рамка «полароїда» */
+
+  /* ---- Кольори: текст ---- */
+  --color-ink: #1f1a14;              /* основний текст на папері */
+  --color-ink-muted: #4a4034;        /* другорядний текст на папері */
+  --color-text-on-board: #f2ece1;    /* текст на темній дошці */
+  --color-text-muted: #c4b8a4;       /* другорядний текст на дошці */
+
+  /* ---- Кольори: акценти ---- */
+  --color-accent: #9e1b1b;           /* червоний «штамп» на папері */
+  --color-string: #d83a34;           /* червона нитка */
+  --color-string-shadow: rgba(0, 0, 0, 0.55);
+  --color-pin: #e53935;              /* шпилька */
+  --color-pin-highlight: #ff8a80;
+  --color-tape: rgba(255, 236, 170, 0.6); /* скотч */
+  --color-focus: #ffd54f;            /* кільце фокусу (видно і на дошці, і на папері) */
+  --color-focus-inner: #1f1a14;
+
+  /* ---- Ліхтарик ---- */
+  --color-darkness: rgba(6, 5, 4, 0.92);
+  --torch-radius: 220px;
+
+  /* ---- Типографіка ----
+     Системні шрифти: нуль мережевих запитів = краща швидкодія. */
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans",
+    "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, Consolas,
+    "Courier New", monospace;
+
+  --fs-xs: 0.8125rem;                              /* 13px */
+  --fs-sm: 0.9375rem;                              /* 15px */
+  --fs-base: 1rem;                                 /* 16px */
+  --fs-md: clamp(1.0625rem, 1rem + 0.3vw, 1.25rem);
+  --fs-lg: clamp(1.25rem, 1.1rem + 0.6vw, 1.625rem);
+  --fs-xl: clamp(1.75rem, 1.4rem + 1.6vw, 2.75rem);
+
+  --lh-tight: 1.2;
+  --lh-base: 1.6;
+  --fw-regular: 400;
+  --fw-bold: 700;
+  --tracking-stamp: 0.08em;
+
+  /* ---- Відступи (шкала 4px) ---- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+
+  /* ---- Форма, тіні, шари ---- */
+  --radius-sm: 2px;
+  --radius-md: 6px;
+  --radius-pill: 999px;
+  --shadow-card: 0 2px 2px rgba(0, 0, 0, 0.25), 0 10px 22px rgba(0, 0, 0, 0.45);
+  --shadow-card-hover: 0 4px 4px rgba(0, 0, 0, 0.25), 0 18px 34px rgba(0, 0, 0, 0.55);
+
+  --z-strings: 1;
+  --z-cards: 2;
+  --z-flashlight: 3;
+  --z-header: 10;
+
+  /* ---- Розміри ---- */
+  --container: 72rem;
+  --card-width: clamp(220px, 22vw, 280px);
+  --board-min-height: 780px;
+  --bp-desktop: 900px; /* довідково: у media-запитах значення пишемо числом */
+
+  /* ---- Рух ---- */
+  --dur-fast: 150ms;
+  --dur-med: 300ms;
+  --dur-slow: 1200ms;
+  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+/* Повага до системного налаштування «зменшити рух»
+   та до перемикача «Без ефектів» на сайті. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-fast: 0ms;
+    --dur-med: 0ms;
+    --dur-slow: 0ms;
+  }
+}
+
+:root[data-motion="off"] {
+  --dur-fast: 0ms;
+  --dur-med: 0ms;
+  --dur-slow: 0ms;
+}

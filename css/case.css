@@ -1,0 +1,215 @@
+/* =========================================================================
+   Cluster — сторінка справи
+   Та сама дошка, але замість фото — 5 нотаток-розділів, з'єднаних ниткою.
+   Підключається разом із board.css (нитки, шпильки, рамка дошки).
+   ========================================================================= */
+
+.case-header {
+  padding-block: var(--space-6) var(--space-4);
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  color: var(--color-text-muted);
+  font-size: var(--fs-sm);
+  text-decoration: none;
+}
+
+.back-link:hover {
+  color: var(--color-text-on-board);
+  text-decoration: underline;
+}
+
+.case-header__number {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  letter-spacing: var(--tracking-stamp);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.case-header h1 {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xl);
+}
+
+.case-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-5);
+  margin: 0;
+  font-size: var(--fs-sm);
+}
+
+.case-meta div {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.case-meta dt {
+  color: var(--color-text-muted);
+}
+
+.case-meta dd {
+  margin: 0;
+  font-weight: var(--fw-bold);
+}
+
+/* ---- Дошка справи ---- */
+
+.case-board {
+  padding: var(--space-6) var(--space-4);
+}
+
+.notes {
+  position: relative;
+  z-index: var(--z-cards);
+  display: grid;
+  gap: var(--space-7);
+  max-width: 44rem;
+  margin: 0 auto;
+}
+
+.evidence {
+  position: relative;
+  justify-self: center;
+  width: min(100%, 360px);
+  margin: 0;
+  padding: var(--space-3) var(--space-3) var(--space-4);
+  background: var(--color-photo-frame);
+  color: var(--color-ink);
+  box-shadow: var(--shadow-card);
+  transform: rotate(-1.5deg);
+}
+
+.evidence figcaption {
+  margin-top: var(--space-2);
+  font-size: var(--fs-sm);
+  color: var(--color-ink-muted);
+}
+
+.note {
+  position: relative;
+  padding: var(--space-6) var(--space-5) var(--space-5);
+  background: var(--color-paper);
+  background-image: linear-gradient(transparent 31px, var(--color-paper-shade) 32px);
+  background-size: 100% 32px;
+  color: var(--color-ink);
+  box-shadow: var(--shadow-card);
+}
+
+.note:nth-of-type(odd) {
+  transform: rotate(-0.6deg);
+}
+
+.note:nth-of-type(even) {
+  transform: rotate(0.6deg);
+}
+
+/* Скотч зверху нотатки */
+.note::before {
+  content: "";
+  position: absolute;
+  top: -12px;
+  right: 18%;
+  width: 90px;
+  height: 26px;
+  background: var(--color-tape);
+  transform: rotate(4deg);
+}
+
+.note h2 {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  font-size: var(--fs-lg);
+}
+
+.note__index {
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  color: var(--color-accent);
+}
+
+.note__body {
+  font-size: var(--fs-md);
+  line-height: 2rem; /* текст лягає на «лінійки» паперу */
+}
+
+.note__body p,
+.note__body ul {
+  margin: 0 0 var(--space-3);
+}
+
+.note__body ul {
+  padding-left: var(--space-5);
+}
+
+.note__body li::marker {
+  color: var(--color-accent);
+}
+
+/* ---- Навігація між справами ---- */
+
+.case-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-block: var(--space-4) var(--space-7);
+}
+
+.case-nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: var(--space-2) var(--space-4);
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-weight: var(--fw-bold);
+  text-decoration: none;
+  box-shadow: var(--shadow-card);
+}
+
+.case-nav a:hover {
+  text-decoration: underline;
+}
+
+@media (min-width: 900px) {
+  .case-board {
+    padding: var(--space-7) var(--space-6);
+  }
+
+  .notes {
+    grid-template-columns: 1fr 1fr;
+    max-width: none;
+    gap: var(--space-7) var(--space-6);
+  }
+
+  .evidence {
+    grid-column: 1 / -1;
+  }
+
+  /* Останній (5-й) розділ — на всю ширину, як підсумок */
+  .note:last-of-type {
+    grid-column: 1 / -1;
+    max-width: 44rem;
+    justify-self: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .note,
+  .evidence {
+    transform: none !important;
+  }
+}
+
+:root[data-motion="off"] .note,
+:root[data-motion="off"] .evidence {
+  transform: none;
+}

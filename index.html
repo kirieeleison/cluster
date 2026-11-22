@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cluster — Дошка розслідувань</title>
+    <meta
+      name="description"
+      content="Cluster — інтерактивна дошка розслідувань реальних типів кібератак: як вони працюють і як від них захиститися."
+    />
+    <meta name="theme-color" content="#1c1814" />
+    <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href="data/cases.json" as="fetch" crossorigin="anonymous" />
+
+    <link rel="stylesheet" href="css/tokens.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/board.css" />
+    <script type="module" src="js/board.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#board">Перейти до дошки</a>
+
+    <header class="site-header">
+      <div class="container site-header__inner">
+        <a class="logo" href="./" aria-label="Cluster — на головну">
+          <img class="logo__mark" src="assets/icons/favicon.svg" alt="" width="28" height="28" />
+          Cluster
+        </a>
+
+        <div class="controls" role="group" aria-label="Налаштування відображення">
+          <button class="toggle" type="button" data-setting="illuminateAll" aria-pressed="false">
+            Підсвітити все
+          </button>
+          <button class="toggle" type="button" data-setting="noEffects" aria-pressed="false">
+            Без ефектів
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="container board-intro" aria-labelledby="page-title">
+        <h1 id="page-title">Дошка розслідувань</h1>
+        <p class="lead">
+          Кожне фото — справа про реальний тип кібератаки. Посвітіть ліхтариком, знайдіть зв'язки
+          й відкрийте справу, щоб дізнатися, як діяли зловмисники та як захиститися.
+        </p>
+        <p class="hint">
+          Темно? Натисніть «Підсвітити все». На сенсорних екранах дошку підсвічено автоматично.
+        </p>
+      </section>
+
+      <div class="container">
+        <section id="board" class="board" data-board aria-label="Справи на дошці" tabindex="-1">
+          <ol class="board__cards" data-board-cards>
+            <!-- Картки створює js/board.js з data/cases.json -->
+          </ol>
+          <noscript>
+            <p class="status-message">
+              Для роботи дошки потрібен JavaScript. Увімкніть його в налаштуваннях браузера.
+            </p>
+          </noscript>
+        </section>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        Навчальний студентський проєкт про кібербезпеку. Усі справи на дошці — навчальні приклади.
+      </div>
+    </footer>
+
+    <!-- Шаблон картки справи. Дизайнер може змінювати розмітку,
+         але класи card__* використовує js/board.js — не перейменовуйте їх. -->
+    <template id="card-template">
+      <li class="card">
+        <span class="pin" aria-hidden="true"></span>
+        <img class="card__photo" src="" alt="" width="400" height="300" loading="lazy" decoding="async" />
+        <span class="card__number"></span>
+        <h2 class="card__title"><a class="card__link" href="#"></a></h2>
+        <p class="card__summary"></p>
+        <span class="card__tag"></span>
+      </li>
+    </template>
+  </body>
+</html>

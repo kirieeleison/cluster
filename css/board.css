@@ -1,0 +1,251 @@
+/* =========================================================================
+   Cluster — дошка розслідувань (головна сторінка)
+   Картки-«фото», шпильки, червоні нитки (SVG) та ефект ліхтарика.
+   ========================================================================= */
+
+.board-intro {
+  padding-block: var(--space-6) var(--space-4);
+}
+
+.board-intro h1 {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xl);
+  letter-spacing: 0.02em;
+}
+
+/* ---- Поверхня дошки ---- */
+
+.board {
+  position: relative;
+  margin-block: var(--space-4) var(--space-7);
+  padding: var(--space-6) var(--space-4);
+  border: 10px solid #4a3523;            /* дерев'яна рамка */
+  border-radius: var(--radius-md);
+  box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.6);
+  overflow: hidden;                       /* ліхтарик не виходить за межі */
+}
+
+.board__cards {
+  position: relative;
+  z-index: var(--z-cards);
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  display: grid;
+  gap: var(--space-8);                    /* на мобільних нитки видно між картками */
+  max-width: 340px;
+}
+
+/* ---- Нитки ---- */
+
+.strings {
+  position: absolute;
+  inset: 0;
+  z-index: var(--z-strings);
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.strings__line {
+  fill: none;
+  stroke: var(--color-string);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+}
+
+.strings__shadow {
+  fill: none;
+  stroke: var(--color-string-shadow);
+  stroke-width: 3;
+  transform: translate(2px, 4px);
+}
+
+/* Анімація «натягування» ниток при першому показі */
+.strings.is-animating .strings__line,
+.strings.is-animating .strings__shadow {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: draw-string var(--dur-slow) var(--ease-out) forwards;
+}
+
+@keyframes draw-string {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* ---- Картка справи ---- */
+
+.card {
+  --rot: 0deg;
+  position: relative;
+  padding: var(--space-3) var(--space-3) var(--space-4);
+  background: var(--color-photo-frame);
+  color: var(--color-ink);
+  box-shadow: var(--shadow-card);
+  transform: rotate(var(--rot));
+  transition: transform var(--dur-med) var(--ease-out),
+    box-shadow var(--dur-med) var(--ease-out);
+}
+
+.card:nth-child(even) {
+  --rot: 1.5deg;
+}
+
+.card:nth-child(odd) {
+  --rot: -1.5deg;
+}
+
+.card:hover,
+.card:focus-within {
+  transform: rotate(0deg) translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+/* Шпилька: від її центру тягнуться нитки (див. js/modules/strings.js) */
+.pin {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  width: 18px;
+  height: 18px;
+  margin-left: -9px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, var(--color-pin-highlight), var(--color-pin) 55%, #8e1a17);
+  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.card__photo {
+  aspect-ratio: 4 / 3;
+  width: 100%;
+  object-fit: cover;
+  background: #2b2b2b;
+  filter: grayscale(0.35) contrast(1.05);
+}
+
+.card__number {
+  display: inline-block;
+  margin-top: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--tracking-stamp);
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.card__title {
+  margin: var(--space-1) 0 var(--space-2);
+  font-size: var(--fs-md);
+}
+
+/* Уся картка клікабельна: ::after розтягує посилання на всю площу */
+.card__link {
+  text-decoration: none;
+}
+
+.card__link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+}
+
+.card__link:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+.card__link:focus-visible::after {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 4px;
+  box-shadow: 0 0 0 7px var(--color-focus-inner);
+}
+
+.card__summary {
+  margin: 0 0 var(--space-3);
+  font-size: var(--fs-sm);
+  color: var(--color-ink-muted);
+}
+
+.card__tag {
+  display: inline-block;
+  padding: 0 var(--space-2);
+  border: 1.5px solid var(--color-accent);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+/* ---- Ліхтарик ---- */
+
+.flashlight {
+  position: absolute;
+  inset: 0;
+  z-index: var(--z-flashlight);
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  background: radial-gradient(
+    circle var(--torch-radius) at var(--fx-x, 50%) var(--fx-y, 40%),
+    transparent 0%,
+    transparent 45%,
+    rgba(6, 5, 4, 0.6) 75%,
+    var(--color-darkness) 100%
+  );
+  transition: opacity var(--dur-med), visibility var(--dur-med);
+}
+
+:root[data-torch="on"] .flashlight {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ---- Десктоп: «вільне» розміщення карток за координатами з data/cases.json ---- */
+
+@media (min-width: 900px) {
+  .board {
+    min-height: var(--board-min-height);
+    padding: 0;
+  }
+
+  .board__cards {
+    position: absolute;
+    inset: 0;
+    display: block;
+    max-width: none;
+  }
+
+  .card {
+    position: absolute;
+    left: var(--x, 50%);
+    top: var(--y, 10%);
+    width: var(--card-width);
+    transform: translateX(-50%) rotate(var(--rot));
+  }
+
+  .card:hover,
+  .card:focus-within {
+    transform: translateX(-50%) rotate(0deg) translateY(-6px);
+  }
+}
+
+/* ---- Без анімацій ---- */
+
+@media (prefers-reduced-motion: reduce) {
+  .strings.is-animating .strings__line,
+  .strings.is-animating .strings__shadow {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+}
+
+:root[data-motion="off"] .strings.is-animating .strings__line,
+:root[data-motion="off"] .strings.is-animating .strings__shadow {
+  animation: none;
+  stroke-dashoffset: 0;
+}

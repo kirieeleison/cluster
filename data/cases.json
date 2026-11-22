@@ -1,0 +1,45 @@
+{
+  "cases": [
+    {
+      "id": "phishing-bank",
+      "number": "Справа №001",
+      "title": "Лист від «банку»",
+      "summary": "Клієнти отримали лист про «блокування картки» з посиланням на підроблений сайт.",
+      "threat": "Фішинг",
+      "image": {
+        "src": "assets/img/cases/phishing-bank.svg",
+        "alt": "Конверт із гачком для риболовлі замість печатки"
+      },
+      "position": { "x": 20, "y": 7 }
+    },
+    {
+      "id": "ransomware-archive",
+      "number": "Справа №002",
+      "title": "Зашифрований архів",
+      "summary": "Уранці всі файли бухгалтерії стали недоступні, а на екрані з'явилася вимога викупу.",
+      "threat": "Програма-вимагач",
+      "image": {
+        "src": "assets/img/cases/ransomware-archive.svg",
+        "alt": "Папки з документами, закриті великим навісним замком"
+      },
+      "position": { "x": 50, "y": 40 }
+    },
+    {
+      "id": "password-reuse",
+      "number": "Справа №003",
+      "title": "Чужий пароль",
+      "summary": "Зламаний пароль від форуму відкрив зловмисникам доступ до пошти та соцмереж.",
+      "threat": "Підбір облікових даних",
+      "image": {
+        "src": "assets/img/cases/password-reuse.svg",
+        "alt": "Один ключ, що підходить до трьох різних дверей"
+      },
+      "position": { "x": 80, "y": 9 }
+    }
+  ],
+  "links": [
+    ["phishing-bank", "ransomware-archive"],
+    ["ransomware-archive", "password-reuse"],
+    ["phishing-bank", "password-reuse"]
+  ]
+}

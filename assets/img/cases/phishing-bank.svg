@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <!-- Заглушка: замініть на реальне фото справи (WebP/JPEG, 800×600) -->
+  <rect width="400" height="300" fill="#2e3440"/>
+  <rect x="80" y="80" width="240" height="150" rx="6" fill="#e5dcc8"/>
+  <path d="M80 86 L200 170 L320 86" fill="none" stroke="#8c7f68" stroke-width="5"/>
+  <path d="M200 30 V120 a26 26 0 1 1 -26 26" fill="none" stroke="#c9ced6" stroke-width="7" stroke-linecap="round"/>
+  <path d="M174 146 l-10 -14" stroke="#c9ced6" stroke-width="7" stroke-linecap="round"/>
+  <text x="200" y="270" fill="#c9ced6" font-family="monospace" font-size="16" text-anchor="middle">ДОКАЗ 001</text>
+</svg>

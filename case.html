@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Справа — Cluster</title>
+    <meta
+      name="description"
+      content="Матеріали справи: що сталося, як діяла атака, наслідки, захист і навчальні висновки."
+    />
+    <meta name="theme-color" content="#1c1814" />
+    <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml" />
+
+    <link rel="stylesheet" href="css/tokens.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/board.css" />
+    <link rel="stylesheet" href="css/case.css" />
+    <script type="module" src="js/case.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#case-content">Перейти до матеріалів справи</a>
+
+    <header class="site-header">
+      <div class="container site-header__inner">
+        <a class="logo" href="./" aria-label="Cluster — на головну">
+          <img class="logo__mark" src="assets/icons/favicon.svg" alt="" width="28" height="28" />
+          Cluster
+        </a>
+        <div class="controls" role="group" aria-label="Налаштування відображення">
+          <button class="toggle" type="button" data-setting="noEffects" aria-pressed="false">
+            Без ефектів
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main id="main">
+      <div class="container case-header">
+        <a class="back-link" href="./">← До дошки розслідувань</a>
+        <span class="case-header__number" data-case-number></span>
+        <h1 data-case-title>Завантаження справи…</h1>
+        <dl class="case-meta" data-case-meta>
+          <div><dt>Дата:</dt><dd data-meta="date">—</dd></div>
+          <div><dt>Тип загрози:</dt><dd data-meta="threat">—</dd></div>
+          <div><dt>Рівень небезпеки:</dt><dd data-meta="level">—</dd></div>
+        </dl>
+      </div>
+
+      <div class="container">
+        <div class="status-message" data-case-error hidden>
+          <p>Такої справи немає в архіві. Можливо, посилання застаріло.</p>
+          <a href="./">Повернутися до дошки розслідувань</a>
+        </div>
+
+        <!-- Єдиний шаблон для всіх справ: 5 розділів у фіксованому порядку.
+             Текст підставляє js/case.js із data/cases/<id>.json → sections.<ключ> -->
+        <article id="case-content" class="board case-board" data-case-board tabindex="-1">
+          <div class="notes">
+            <figure class="evidence">
+              <span class="pin" aria-hidden="true"></span>
+              <img data-case-image src="" alt="" width="400" height="300" decoding="async" />
+              <figcaption data-case-caption></figcaption>
+            </figure>
+
+            <section class="note" data-section="what" aria-labelledby="s-what">
+              <span class="pin" aria-hidden="true"></span>
+              <h2 id="s-what"><span class="note__index">01</span> Що сталося</h2>
+              <div class="note__body"></div>
+            </section>
+
+            <section class="note" data-section="how" aria-labelledby="s-how">
+              <span class="pin" aria-hidden="true"></span>
+              <h2 id="s-how"><span class="note__index">02</span> Як діяла атака</h2>
+              <div class="note__body"></div>
+            </section>
+
+            <section class="note" data-section="impact" aria-labelledby="s-impact">
+              <span class="pin" aria-hidden="true"></span>
+              <h2 id="s-impact"><span class="note__index">03</span> Наслідки</h2>
+              <div class="note__body"></div>
+            </section>
+
+            <section class="note" data-section="defense" aria-labelledby="s-defense">
+              <span class="pin" aria-hidden="true"></span>
+              <h2 id="s-defense"><span class="note__index">04</span> Як захиститися</h2>
+              <div class="note__body"></div>
+            </section>
+
+            <section class="note" data-section="lessons" aria-labelledby="s-lessons">
+              <span class="pin" aria-hidden="true"></span>
+              <h2 id="s-lessons"><span class="note__index">05</span> Навчальні висновки</h2>
+              <div class="note__body"></div>
+            </section>
+          </div>
+        </article>
+
+        <nav class="case-nav" aria-label="Інші справи">
+          <a data-nav-prev href="#" hidden></a>
+          <a data-nav-next href="#" hidden></a>
+        </nav>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        Навчальний студентський проєкт про кібербезпеку. Усі справи на дошці — навчальні приклади.
+      </div>
+    </footer>
+  </body>
+</html>

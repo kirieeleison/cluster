@@ -1,0 +1,14 @@
+# Системні файли
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Редактори
+.vscode/*
+!.vscode/extensions.json
+.idea/
+
+# Залежності та звіти (якщо колись знадобляться інструменти)
+node_modules/
+lighthouse-*.html
+*.log

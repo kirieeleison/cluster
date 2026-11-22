@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <!-- Заглушка: замініть на реальне фото справи (WebP/JPEG, 800×600) -->
+  <rect width="400" height="300" fill="#3b3226"/>
+  <rect x="70" y="90" width="120" height="100" rx="4" fill="#c9a86a"/>
+  <rect x="70" y="80" width="50" height="16" rx="3" fill="#c9a86a"/>
+  <rect x="210" y="90" width="120" height="100" rx="4" fill="#b8955a"/>
+  <rect x="210" y="80" width="50" height="16" rx="3" fill="#b8955a"/>
+  <path d="M170 150 V120 a30 30 0 0 1 60 0 V150" fill="none" stroke="#d9dde3" stroke-width="12"/>
+  <rect x="150" y="145" width="100" height="80" rx="8" fill="#d9dde3"/>
+  <circle cx="200" cy="180" r="10" fill="#3b3226"/>
+  <rect x="196" y="185" width="8" height="22" fill="#3b3226"/>
+  <text x="200" y="270" fill="#e8dcc4" font-family="monospace" font-size="16" text-anchor="middle">ДОКАЗ 002</text>
+</svg>
